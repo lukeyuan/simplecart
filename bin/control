@@ -1,0 +1,33 @@
+#!/bin/bash -eu
+
+PATH=/bin/:/usr/bin:$PATH
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+
+function start {
+	httpd -f $OPENSHIFT_MYCART_DIR/etc/httpd.conf -k start
+}
+
+function stop {
+	httpd -f $OPENSHIFT_MYCART_DIR/etc/httpd.conf -k stop
+}
+
+function restart {
+	httpd -f $OPENSHIFT_MYCART_DIR/etc/httpd.conf -k restart
+  }
+
+function status {
+  client_result "This is client status output from the mock cartridge"
+  }
+
+
+
+case "$1" in
+  start)                start ;;
+  stop)                 stop ;;
+  restart)              restart ;;
+  *)           exit 0
+esac
+
+exit 0
